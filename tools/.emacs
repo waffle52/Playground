@@ -7,6 +7,9 @@
       indent-tabs-mode t)
 (require 'whitespace)
 (setq whitespace-style '(face empty lines-tail trailing))
+;Clear the eshell buffer.
+(defun eshell/clear ()
+   (let ((eshell-buffer-maximum-lines 0)) (eshell-truncate-buffer)))
 (global-whitespace-mode t)
 (setq column-number-mode t)
 (custom-set-variables
@@ -24,5 +27,10 @@
  )
 (package-initialize)
 (load-theme 'monokai)
+(add-hook 'sh-mode-hook 'flycheck-mode)
 (add-hook 'python-mode-hook
   (lambda () (setq python-indent-offset 4)))
+(require 'package)
+(add-to-list 'package-archives
+'("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
